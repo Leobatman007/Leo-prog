@@ -44,6 +44,27 @@ class Livro {
         echo "Autor: " . $this->autor . "<br>";
         echo "Ano de Publicação: " . $this->anoPublicacao . "<br>";
         echo "Status: " . $status . "<br>";
+   }
+    public function emprestar() {
+        if ($this->disponivel) {
+            $this->disponivel = false;
+            echo "O livro '{$this->titulo}' foi emprestado com sucesso.<br>";
+        } else {
+            echo "O livro '{$this->titulo}' já está emprestado.<br>";
+        }
+    }
+    public function devolver() {
+        if (!$this->disponivel) {
+            $this->disponivel = true;
+            echo "O livro '{$this->titulo}' foi devolvido com sucesso.<br>";
+        } else {
+            echo "O livro '{$this->titulo}' já está disponível.<br>";
+        }
+    }
+    public function estaDisponivel() {
+        return $this->disponivel
+            ? "O livro '{$this->titulo}' está disponível para empréstimo.<br>"
+            : "O livro '{$this->titulo}' não está disponível no momento.<br>";
     }
 }
 ?>
