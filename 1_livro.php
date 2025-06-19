@@ -17,7 +17,6 @@ class Livro {
     public function getAutor() {
         return $this->autor;
     }
-
     public function getAnoPublicacao() {
         return $this->anoPublicacao;
     }
@@ -45,20 +44,29 @@ class Livro {
         echo "Ano de Publicação: " . $this->anoPublicacao . "<br>";
         echo "Status: " . $status . "<br>";
    }
-    public function emprestar() {
+    public function emprestar($nomeLeitor) {
         if ($this->disponivel) {
             $this->disponivel = false;
-            echo "O livro '{$this->titulo}' foi emprestado com sucesso.<br>";
+            $this->leitorAtual = $nomeLeitor;
+            echo "O livro '{$this->titulo}' foi emprestado para {$nomeLeitor}.<br>";
         } else {
-            echo "O livro '{$this->titulo}' já está emprestado.<br>";
+            echo "O livro '{$this->titulo}' já está emprestado para {$this->leitorAtual}.<br>";
         }
     }
     public function devolver() {
         if (!$this->disponivel) {
+             echo "O livro '{$this->titulo}' foi devolvido por {$this->leitorAtual}.<br>";
             $this->disponivel = true;
-            echo "O livro '{$this->titulo}' foi devolvido com sucesso.<br>";
+            $this->leitorAtual = null;
         } else {
             echo "O livro '{$this->titulo}' já está disponível.<br>";
+        }
+    }
+     public function quemPegou() {
+        if ($this->leitorAtual !== null) {
+            return "O livro '{$this->titulo}' está com {$this->leitorAtual}.<br>";
+        } else {
+            return "O livro '{$this->titulo}' está disponível.<br>";
         }
     }
     public function estaDisponivel() {
